@@ -23,7 +23,7 @@
                   <td class="px-4 py-4">{{ $index + 1 }}</td>
                   <td class="px-4 py-4">
                     <div class="flex justify-start items-center">
-                      <span class="px-4 bg-primary text-light font-medium rounded-full">
+                        <span class="text-center px-2 py-1 w-full bg-primary text-light font-medium rounded-lg">
                         {{ $transaction->category }}
                       </span>
                     </div>

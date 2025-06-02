@@ -2,19 +2,14 @@
       <section class="w-full bg-light shadow-lg rounded-2xl p-6 mb-6 items-center justify-center">
         <!-- Calendar -->
         <div class="flex items-center space-x-2 mb-6">
-          <div class="flex justify-center items-center h-8 w-8 bg-primary text-light rounded-full cursor-pointer hover:text-light hover:bg-accent shadow-lg">
+        <div class="flex justify-center items-center h-8 w-8 bg-primary text-light rounded-full cursor-pointer hover:text-light hover:bg-accent shadow-lg">
             <i class="fa fa-calendar fa-md" aria-hidden="true"></i>
-          </div>
-          <!-- Display Tanggal dan Tombol -->
-          <div class="flex items-center gap-2">
+        </div>
+        <div class="flex items-center gap-2">
             <p id="tanggal-terpilih" class="text-md font-bold text-dark">
-              Senin, 05 Mei 2025
+            {{ now()->translatedFormat('l, d F Y') }}
             </p>
-            <i onclick="tampilkanPemilihTanggal()" class="fa-solid fa-chevron-down bg-accent text-light hover:bg-primary p-0.5 rounded-full cursor-pointer transition duration-300 ease-in-out"></i>
-          </div>
-
-          <!-- Input tanggal (disembunyikan awalnya) -->
-          <input type="date" id="pemilih-tanggal" class="hidden mt-2 w-fit border border-gray-300 bg-gray-100 text-dark text-sm rounded-full px-4 py-2 shadow-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300 ease-in-out cursor-pointer" onchange="aturTanggalTerpilih(this.value)" />
+        </div>
         </div>
 
         <!-- Ringkasan -->
@@ -137,7 +132,7 @@
                             <td class="px-4 py-4">{{ $index + 1 }}</td>
                             <td class="px-4 py-4">
                                 <div class="flex justify-start items-center">
-                                <span class="text-center px-4 bg-primary text-light font-medium rounded-full">
+                                <span class="text-center px-2 py-1 w-full bg-primary text-light font-medium rounded-lg">
                                     {{ $transaction->category }}
                                 </span>
                                 </div>
@@ -272,7 +267,7 @@
                 Rata-rata: <span>Rp{{ number_format($rataRata, 2, ',', '.') }}</span></p>
             </div>
             <div
-              class="bg-gradient-to-t from-accent to-base rounded-xl flex items-center justify-center text-light p-4"
+              class="bg-gradient-to-t from-accent to-base rounded-xl h-auto flex items-center justify-center text-light p-4"
             >
               <canvas id="barChartCanvas" 
                     data-labels='@json($labels)'

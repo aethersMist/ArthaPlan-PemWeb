@@ -28,15 +28,15 @@ document.addEventListener("DOMContentLoaded", function () {
                         data: dataIn,
                         backgroundColor: "#88cf0f",
                         borderRadius: 8,
-                        barThickness: 40,
+                        barThickness: 20,
                     },
                     {
                         label: "Pengeluaran",
                         data: dataOut,
                         backgroundColor: "#f87171",
                         borderRadius: 8,
-                        barThickness: 40,
-                    }
+                        barThickness: 20,
+                    },
                 ],
             },
             options: {
@@ -57,23 +57,24 @@ document.addEventListener("DOMContentLoaded", function () {
                         callbacks: {
                             label: function (context) {
                                 return (
-                                    context.dataset.label + ": Rp" + context.raw.toLocaleString("id-ID")
+                                    context.dataset.label +
+                                    ": Rp" +
+                                    context.raw.toLocaleString("id-ID")
                                 );
                             },
                         },
                     },
                     legend: {
-                        position: 'top',
+                        position: "top",
                         labels: {
                             usePointStyle: true,
-                            pointStyle: 'rectRounded'
-                        }
-                    }
+                            pointStyle: "rectRounded",
+                        },
+                    },
                 },
             },
         });
     }
-
 
     // Ambil data dari atribut data-canvas
     const canvas = document.getElementById("barChartCanvas");
@@ -142,5 +143,25 @@ document.addEventListener("DOMContentLoaded", function () {
         const url = new URL(window.location.href);
         url.searchParams.set("date", this.value);
         window.location.href = url.toString();
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        function updateWaktu() {
+            const sekarang = new Date();
+            const options = {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                timeZone: "Asia/Jakarta",
+            };
+
+            document.getElementById("tanggal-terpilih").textContent =
+                sekarang.toLocaleDateString("id-ID", options);
+        }
+
+        // Update setiap detik
+        updateWaktu();
+        setInterval(updateWaktu, 1000);
     });
 });
