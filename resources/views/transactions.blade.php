@@ -18,52 +18,52 @@
         </tr>
       </thead>
       <tbody class="bg-light divide-y divide-gray-200">
-  @forelse($transactions as $index => $transaction)
-          <tr>
-            <td class="px-4 py-4">{{ $index + 1 }}</td>
-            <td class="px-4 py-4">
-              <div class="flex justify-start items-center">
-                <span class="px-4 bg-primary text-light font-medium rounded-full">
-                  {{ $transaction->category }}
-                </span>
-              </div>
-            </td>
-            <td class="px-4 py-4">{{ $transaction->description }}</td>
-            <td class="px-4 py-4">{{ $transaction->transaction_date->translatedFormat('l, d F Y') }}</td>
-            <td class="px-4 py-4">
-              <div class="flex justify-start items-center gap-1 text-sm lg:text-lg">
-                <span class="{{ $transaction->type == 'in' ? 'text-accent' : 'text-danger' }}">
-                  <i class="fa fa-{{ $transaction->type == 'in' ? 'plus' : 'minus' }}" aria-hidden="true"></i>
-                </span>
-                <p>Rp{{ number_format($transaction->amount, 0, ',', '.') }}</p>
-              </div>
-            </td>
-            <td class="flex gap-2 px-4 py-4">
-              <!-- Tombol Edit -->
-              <x-primary-button data-modal-target="editRiwayat-{{ $transaction->id }}"
-                      data-modal-toggle="editRiwayat-{{ $transaction->id }}"
-                      type="button"
-                      class="flex justify-center items-center h-8 w-8 bg-accent text-light rounded-full hover:bg-primary transition duration-300 ease-in-out">
-                <i class="fa fa-edit"></i>
-              </x-primary-button>
+        @forelse($transactions as $index => $transaction)
+                <tr>
+                  <td class="px-4 py-4">{{ $index + 1 }}</td>
+                  <td class="px-4 py-4">
+                    <div class="flex justify-start items-center">
+                      <span class="px-4 bg-primary text-light font-medium rounded-full">
+                        {{ $transaction->category }}
+                      </span>
+                    </div>
+                  </td>
+                  <td class="px-4 py-4">{{ $transaction->description }}</td>
+                  <td class="px-4 py-4">{{ $transaction->transaction_date->translatedFormat('l, d F Y') }}</td>
+                  <td class="px-4 py-4">
+                    <div class="flex justify-start items-center gap-1 text-sm lg:text-lg">
+                      <span class="{{ $transaction->type == 'in' ? 'text-accent' : 'text-danger' }}">
+                        <i class="fa fa-{{ $transaction->type == 'in' ? 'plus' : 'minus' }}" aria-hidden="true"></i>
+                      </span>
+                      <p>Rp{{ number_format($transaction->amount, 0, ',', '.') }}</p>
+                    </div>
+                  </td>
+                  <td class="flex gap-2 px-4 py-4">
+                    <!-- Tombol Edit -->
+                    <x-primary-button data-modal-target="editRiwayat-{{ $transaction->id }}"
+                            data-modal-toggle="editRiwayat-{{ $transaction->id }}"
+                            type="button"
+                            class="flex justify-center items-center h-8 w-8 bg-accent text-light rounded-full hover:bg-primary transition duration-300 ease-in-out">
+                      <i class="fa fa-edit"></i>
+                    </x-primary-button>
 
-              <!-- Tombol Hapus -->
-              <x-secondary-button data-modal-target="deleteAlertRiwayat-{{ $transaction->id }}"
-                      data-modal-toggle="deleteAlertRiwayat-{{ $transaction->id }}"
-                      type="button"
-                      class="flex justify-center items-center h-8 w-8 bg-primary text-light rounded-full hover:bg-accent transition duration-300 ease-in-out">
-                <i class="fa fa-trash"></i>
-              </x-secondary-button>
+                    <!-- Tombol Hapus -->
+                    <x-secondary-button data-modal-target="deleteAlertRiwayat-{{ $transaction->id }}"
+                            data-modal-toggle="deleteAlertRiwayat-{{ $transaction->id }}"
+                            type="button"
+                            class="flex justify-center items-center h-8 w-8 bg-primary text-light rounded-full hover:bg-accent transition duration-300 ease-in-out">
+                      <i class="fa fa-trash"></i>
+                    </x-secondary-button>
+                  </td>
+                </tr>
+
+                @empty
+          <tr>
+            <td colspan="6" class="w-full text-center py-4 text-md text-dark font-medium bg-light">
+              Tidak ada data transaksi.
             </td>
           </tr>
-
-          @empty
-    <tr>
-      <td colspan="6" class="w-full text-center py-4 text-md text-dark font-medium bg-light">
-        Tidak ada data transaksi.
-      </td>
-    </tr>
-  @endforelse
+        @endforelse
       </tbody>
     </table>
 

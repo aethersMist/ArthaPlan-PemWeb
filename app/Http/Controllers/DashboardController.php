@@ -225,8 +225,4 @@ class DashboardController extends Controller
 
         return [$labels, $dataOut, $dataIn];
     }
-
-
-
-
 }
