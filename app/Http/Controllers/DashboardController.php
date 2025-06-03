@@ -18,7 +18,7 @@ class DashboardController extends Controller
         
         // Set default ke 1 Juni jika tidak ada parameter date
         if (!$request->has('date')) {
-            $selectedDate = now()->month(6)->day(1)->format('Y-m-d');
+            $selectedDate = now()->format('Y-m-d');
         }
 
         $date = Carbon::parse($selectedDate);

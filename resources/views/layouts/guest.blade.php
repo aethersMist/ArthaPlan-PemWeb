@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('favicon.svg') }}" type="image/x-icon">
         
         <!-- Font Awesome -->
         <link
@@ -28,11 +28,10 @@
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-">
+    <body class="font-sans text-dark antialiased">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-8 bg-base">
 
-<div class="flex-grow flex items-center justify-center">                {{ $slot }}
-            </div>
+     {{ $slot }}
         </div>
     </body>
 </html>

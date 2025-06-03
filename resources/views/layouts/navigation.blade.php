@@ -18,13 +18,13 @@
             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Beranda') }}
             </x-nav-link>
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
                 {{ __('Laporan') }}
             </x-nav-link>
             <x-nav-link :href="route('transactions')" :active="request()->routeIs('transactions')">
                 {{ __('Riwayat') }}
             </x-nav-link>
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-nav-link :href="route('budgets')" :active="request()->routeIs('budgets')">
                 {{ __('Anggaran') }}
             </x-nav-link>
         </div>
@@ -80,13 +80,13 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+             <x-responsive-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
                 {{ __('Laporan') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('transactions')" :active="request()->routeIs('transactions')">
                 {{ __('Riwayat') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('budgets')" :active="request()->routeIs('budgets')">
                 {{ __('Anggaran') }}
             </x-responsive-nav-link>
         </div>

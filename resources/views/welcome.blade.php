@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'ArthaPlan') }}</title>
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('favicon.svg') }}" type="image/x-icon">
         
         <!-- Font Awesome -->
         <link
@@ -41,7 +41,7 @@
             </button>
 
             <!-- Logo -->
-            <a href="{{ route('/') }}" class="flex items-center justify-center space-x-2 md:mr-4">
+            <a href="#" class="flex items-center justify-center space-x-2 md:mr-4">
                 <x-application-logo class="block h-9 w-auto fill-current text-light" />
                 <span class="self-center text-xl md:text-lg font-semibold whitespace-nowrap text-light">ArthaPlan</span>
             </a>
@@ -368,10 +368,10 @@
               </h2>
               <ul class="text-netral">
                 <li class="mb-4">
-                  <a href="{{ route('/') }}" class="hover:underline">Privacy Policy</a>
+                  <a href="#" class="hover:underline">Privacy Policy</a>
                 </li>
                 <li>
-                  <a href="{{ route('/') }}" class="hover:underline">Terms &amp; Conditions</a>
+                  <a href="#" class="hover:underline">Terms &amp; Conditions</a>
                 </li>
               </ul>
             </div>
@@ -383,7 +383,7 @@
         <div class="flex items-center justify-center">
           <span class="text-sm text-netral text-center"
             >© 2025
-            <a href="{{ route('/') }}" class="hover:underline">Kelompok Pemrograman Web™</a>.
+            <a href="#" class="hover:underline">Kelompok Pemrograman Web™</a>.
             All Rights Reserved.
           </span>
         </div>
