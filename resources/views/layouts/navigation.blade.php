@@ -122,13 +122,13 @@
         <div class="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-2">
           <div>
             <label for="category" class="block mb-2 text-sm font-medium text-dark">Kategori</label>
-            <input type="text" id="category" name="category" placeholder="Makanan" required
+            <x-text-input type="text" id="category" name="category" placeholder="Makanan" required
                    class="block w-full p-2.5 text-sm text-dark bg-gray-50 border border-gray-300 rounded-lg" />
           </div>
           <div>
             <label for="type" class="block mb-2 text-sm font-medium text-dark">Jenis Transaksi</label>
             <select id="type" name="type" required
-                    class="block w-full p-2.5 text-sm text-dark bg-gray-50 border border-gray-300 rounded-lg">
+                    class="block w-full p-2.5 text-sm text-dark bg-gray-50 border border-netral-light focus:border-accent focus:ring-accent rounded-lg">
               <option value="" disabled>Pilih Jenis</option>
               <option value="in">Pemasukan</option>
               <option value="out">Pengeluaran</option>
@@ -136,18 +136,18 @@
           </div>
           <div>
             <label for="amount" class="block mb-2 text-sm font-medium text-dark">Nominal</label>
-            <input type="number" id="amount" name="amount" placeholder="100000" required
+            <x-text-input type="number" id="amount" name="amount" placeholder="100000" required
                    class="block w-full p-2.5 text-sm text-dark bg-gray-50 border border-gray-300 rounded-lg" />
           </div>
           <div>
             <label for="transaction_date" class="block mb-2 text-sm font-medium text-dark">Tanggal</label>
-            <input type="date" id="transaction_date" name="transaction_date" required
+            <x-text-input type="date" id="transaction_date" name="transaction_date" required
                    class="block w-full p-2.5 text-sm text-dark bg-gray-50 border border-gray-300 rounded-lg" />
           </div>
           <div class="col-span-2">
             <label for="description" class="block mb-2 text-sm font-medium text-dark">Keterangan</label>
             <textarea id="description" name="description" rows="3"
-                      class="block w-full p-2.5 text-sm text-dark bg-gray-50 border border-gray-300 rounded-lg resize-none"
+                      class="block w-full p-2.5 text-sm text-dark bg-gray-50 border border-netral-light focus:border-accent focus:ring-accent rounded-lg resize-none"
                       placeholder="Keterangan"></textarea>
           </div>
         </div>

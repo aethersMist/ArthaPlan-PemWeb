@@ -22,9 +22,17 @@ class BudgetController extends Controller
 
         $currentDate = now()->translatedFormat('l, d F Y');
 
+        // Anggaran
+        $anggaran = Budget::sum('amount');
+
+        $persenSisa = $anggaran > 0 ? round((($anggaran - $outcome) / $anggaran) * 100) : 100;
+        $persenPakai = 100 - $persenSisa;
+
+         
+
         return view('budgets', compact(
             'budgets', 'balance',  
-            'income', 'outcome',
+            'income', 'outcome', 'persenSisa', 'persenPakai'
         ));
     }
 

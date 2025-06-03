@@ -165,3 +165,59 @@ document.addEventListener("DOMContentLoaded", function () {
         setInterval(updateWaktu, 1000);
     });
 });
+
+// Anggaran
+document.addEventListener("DOMContentLoaded", function () {
+    const ctxContainer = document.getElementById("donutChartPersen");
+
+    if (!ctxContainer) return;
+
+    // Ambil data dari atribut data-sisa dan data-pakai (string -> number)
+    const persenSisa = Number(ctxContainer.getAttribute("data-sisa")) || 100;
+    const persenPakai = Number(ctxContainer.getAttribute("data-pakai")) || 0;
+
+    // Buat canvas dan atur ukuran kecil
+    const canvas = document.createElement("canvas");
+    canvas.width = 200;
+    canvas.height = 200;
+    ctxContainer.appendChild(canvas);
+
+    const ctx = canvas.getContext("2d");
+
+    const data = {
+        labels: ["Sisa", "Terpakai"],
+        datasets: [
+            {
+                label: "Persentase Anggaran",
+                data: [persenSisa, persenPakai],
+                backgroundColor: ["#88cf0f", "#285539"],
+                borderColor: ["#ffffff", "#ffffff"],
+                borderWidth: 2,
+            },
+        ],
+    };
+
+    const config = {
+        type: "doughnut",
+        data: data,
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            cutout: "70%",
+            plugins: {
+                legend: {
+                    display: false,
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (tooltipItem) {
+                            return `${tooltipItem.label}: ${tooltipItem.raw}%`;
+                        },
+                    },
+                },
+            },
+        },
+    };
+
+    new Chart(ctx, config);
+});

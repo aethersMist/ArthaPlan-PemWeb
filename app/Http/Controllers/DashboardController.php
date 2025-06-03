@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use App\Models\Budget;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -32,14 +33,20 @@ class DashboardController extends Controller
         $income = Transaction::where('type', 'in')->sum('amount');
         $outcome = Transaction::where('type', 'out')->sum('amount');
         $balance = $income - $outcome;
-        $transactions = Transaction::latest()->take(5)->get();
+        $transactions = Transaction::latest()->take(3)->get();
 
             $currentDate = now()->translatedFormat('l, d F Y');
+
+        // Anggaran
+        $anggaran = Budget::sum('amount');
+
+        $persenSisa = $anggaran > 0 ? round((($anggaran - $outcome) / $anggaran) * 100) : 100;
+        $persenPakai = 100 - $persenSisa;
 
         return view('dashboard', compact(
             'transactions', 'balance', 'rataRata', 
             'income', 'outcome', 'labels', 
-            'dataOut', 'dataIn', 'filter', 'date', 'currentDate'
+            'dataOut', 'dataIn', 'filter', 'date', 'currentDate', 'persenSisa', 'persenPakai'
         ));
     }
 

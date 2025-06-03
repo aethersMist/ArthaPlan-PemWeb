@@ -27,101 +27,104 @@
         <script src="https://unpkg.com/flowbite@latest/dist/flowbite.min.js"></script>
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+        <script>document.documentElement.classList.add('js')</script>
+        <script src="https://unpkg.com/taos@1.0.5/dist/taos.js"></script>
+
     </head>
-    <body class="font-display antialiased">
+    <body class="font-display antialiased scroll-smooth">
         <div class="min-h-screen bg-base">
         <!-- Header / Navbar -->
         <header>
-    <nav x-data="{ open: false }" class="fixed top-0 left-0 right-0 z-50 bg-primary-dark py-2.5 m-4 md:mx-6 max-w-screen-xl:rounded-full rounded-2xl shadow-lg px-4 sm:px-6 md:px-8">
-        <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto gap-4 md:gap-6">
-            <!-- Hamburger Menu - Show on mobile and tablet (md) -->
-            <button @click="open = !open" class="md:hidden inline-flex h-8 w-8 items-center justify-center rounded-md p-2 text-accent bg-primary-soft hover:bg-accent hover:text-light focus:outline-none focus:ring-2 focus:ring-inset focus:ring-light">
-                <i class="fa fa-bars fa-lg" :class="{ 'hidden': open, 'inline-flex': !open }"></i>
-                <i class="fa-solid fa-xmark" :class="{ 'hidden': !open, 'inline-flex': open }"></i>
-            </button>
+          <nav x-data="{ open: false }" class="fixed top-0 left-0 right-0 z-50 bg-primary-dark py-2.5 m-4 md:mx-6 max-w-screen-xl:rounded-full rounded-2xl shadow-lg px-4 sm:px-6 md:px-8" >
+              <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto gap-4 md:gap-6">
+                  <!-- Hamburger Menu - Show on mobile and tablet (md) -->
+                  <button @click="open = !open" class="md:hidden inline-flex h-8 w-8 items-center justify-center rounded-md p-2 text-accent bg-primary-soft hover:bg-accent hover:text-light focus:outline-none focus:ring-2 focus:ring-inset focus:ring-light">
+                      <i class="fa fa-bars fa-lg" :class="{ 'hidden': open, 'inline-flex': !open }"></i>
+                      <i class="fa-solid fa-xmark" :class="{ 'hidden': !open, 'inline-flex': open }"></i>
+                  </button>
 
-            <!-- Logo -->
-            <a href="#" class="flex items-center justify-center space-x-2 md:mr-4">
-                <x-application-logo class="block h-9 w-auto fill-current text-light" />
-                <span class="self-center text-xl md:text-lg font-semibold whitespace-nowrap text-light">ArthaPlan</span>
-            </a>
+                  <!-- Logo -->
+                  <a href="#" class="flex items-center justify-center space-x-2 md:mr-4">
+                      <x-application-logo class="block h-9 w-auto fill-current text-light" />
+                      <span class="self-center text-xl md:text-lg font-semibold whitespace-nowrap text-light">ArthaPlan</span>
+                  </a>
 
-            <!-- Navigation Links (Desktop Only - Show from lg up) -->
-            <div class="hidden lg:flex space-x-4 items-center justify-between w-full lg:w-auto lg:order-1">
-                <x-nav-link href="#beranda" active>
-                    {{ __('Beranda') }}
-                </x-nav-link>
-                <x-nav-link href="#tentang" active>
-                    {{ __('Tentang') }}
-                </x-nav-link>
-                <x-nav-link href="#fitur" active>
-                    {{ __('Fitur') }}
-                </x-nav-link>
-                <x-nav-link href="#highlight" active>
-                    {{ __('Highlight') }}
-                </x-nav-link>
-            </div>
+                  <!-- Navigation Links (Desktop Only - Show from lg up) -->
+                  <div class="hidden lg:flex space-x-4 items-center justify-between w-full lg:w-auto lg:order-1">
+                      <x-nav-link href="#beranda" active>
+                          {{ __('Beranda') }}
+                      </x-nav-link>
+                      <x-nav-link href="#tentang" active>
+                          {{ __('Tentang') }}
+                      </x-nav-link>
+                      <x-nav-link href="#fitur" active>
+                          {{ __('Fitur') }}
+                      </x-nav-link>
+                      <x-nav-link href="#highlight" active>
+                          {{ __('Highlight') }}
+                      </x-nav-link>
+                  </div>
 
-            <!-- Desktop Auth Buttons (Show from md up) -->
-            <div class="hidden md:flex items-center space-x-2 md:order-2">
-                @if (Route::has('login'))
-                    @auth
-                        <a href="{{ route('dashboard') }}">
-                            <x-primary-button class="rounded-lg px-4 py-2">Dashboard</x-primary-button>
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}">
-                            <x-primary-button class="rounded-lg px-3 py-1.5">Login</x-primary-button>
-                        </a>
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">
-                                <x-secondary-button class="rounded-lg px-3 py-1.5">Sign Up</x-secondary-button>
-                            </a>
-                        @endif
-                    @endauth
-                @endif
-            </div>
-        </div>
+                  <!-- Desktop Auth Buttons (Show from md up) -->
+                  <div class="hidden md:flex items-center space-x-2 md:order-2">
+                      @if (Route::has('login'))
+                          @auth
+                              <a href="{{ route('dashboard') }}">
+                                  <x-primary-button class="rounded-lg px-4 py-2">Dashboard</x-primary-button>
+                              </a>
+                          @else
+                              <a href="{{ route('login') }}">
+                                  <x-primary-button class="rounded-lg px-3 py-1.5">Login</x-primary-button>
+                              </a>
+                              @if (Route::has('register'))
+                                  <a href="{{ route('register') }}">
+                                      <x-secondary-button class="rounded-lg px-3 py-1.5">Sign Up</x-secondary-button>
+                                  </a>
+                              @endif
+                          @endauth
+                      @endif
+                  </div>
+              </div>
 
-        <!-- Responsive Mobile Menu (Show on mobile and tablet) -->
-        <div :class="{ 'block': open, 'hidden': !open }" class="hidden md:hidden">
-            <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link href="#beranda" active>
-                    {{ __('Beranda') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link href="#tentang" active>
-                    {{ __('Tentang') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link href="#fitur" active>
-                    {{ __('Fitur') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link href="#highlight" active>
-                    {{ __('Highlight') }}
-                </x-responsive-nav-link>
-            </div>
+              <!-- Responsive Mobile Menu (Show on mobile and tablet) -->
+              <div :class="{ 'block': open, 'hidden': !open }" class="hidden md:hidden">
+                  <div class="pt-2 pb-3 space-y-1">
+                      <x-responsive-nav-link href="#beranda" active>
+                          {{ __('Beranda') }}
+                      </x-responsive-nav-link>
+                      <x-responsive-nav-link href="#tentang" active>
+                          {{ __('Tentang') }}
+                      </x-responsive-nav-link>
+                      <x-responsive-nav-link href="#fitur" active>
+                          {{ __('Fitur') }}
+                      </x-responsive-nav-link>
+                      <x-responsive-nav-link href="#highlight" active>
+                          {{ __('Highlight') }}
+                      </x-responsive-nav-link>
+                  </div>
 
-            <!-- Mobile Auth Buttons -->
-            <div class="pt-3 pb-4 border-t border-gray-200 space-y-2">
-                @if (Route::has('login'))
-                    @auth
-                        <a href="{{ route('dashboard') }}" class="block">
-                            <x-primary-button class="w-full bg-primary">Dashboard</x-primary-button>
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}" class="block">
-                            <x-primary-button class="w-full bg-accent">Login</x-primary-button>
-                        </a>
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="block">
-                                <x-primary-button class="w-full bg-primary">Sign Up</x-primary-button>
-                            </a>
-                        @endif
-                    @endauth
-                @endif
-            </div>
-        </div>
-    </nav>
-</header>
+                  <!-- Mobile Auth Buttons -->
+                  <div class="pt-3 pb-4 border-t border-gray-200 space-y-2">
+                      @if (Route::has('login'))
+                          @auth
+                              <a href="{{ route('dashboard') }}" class="block">
+                                  <x-primary-button class="w-full bg-primary">Dashboard</x-primary-button>
+                              </a>
+                          @else
+                              <a href="{{ route('login') }}" class="block">
+                                  <x-primary-button class="w-full bg-accent">Login</x-primary-button>
+                              </a>
+                              @if (Route::has('register'))
+                                  <a href="{{ route('register') }}" class="block">
+                                      <x-primary-button class="w-full bg-primary">Sign Up</x-primary-button>
+                                  </a>
+                              @endif
+                          @endauth
+                      @endif
+                  </div>
+              </div>
+          </nav>
+      </header>
 
         <!-- Main -->
         <main>
@@ -161,7 +164,7 @@
             href="{{ route('login') }}"
           >
 
-                                                <x-primary-button class="rounded-lg px-8 py-4" >Login</x-primary-button>
+          <x-primary-button class="rounded-lg px-8 py-4" >Login</x-primary-button>
 
           </a>
           <a
@@ -281,7 +284,7 @@
     </section>
 
     <!-- Content 4 -->
-    <section class="px-6 bg-primary-dark" id="hl">
+    <section class="px-6 bg-primary-dark" id="highlight">
       <div
         class="items-center max-w-screen-xl gap-8 px-4 py-8 mx-auto xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6"
       >
@@ -334,30 +337,52 @@
                     >Flowbite</a
                   >
                 </li>
-                <li>
+                <li class="mb-4">
                   <a href="https://tailwindcss.com/" class="hover:underline"
                     >Tailwind CSS</a
+                  >
+                </li>
+                <li class="mb-4">
+                  <a href="https://www.chartjs.org/docs/latest/" class="hover:underline"
+                    >ChartJS</a
+                  >
+                </li>
+                <li class="mb-4">
+                  <a href="https://laravel.com" class="hover:underline"
+                    >Laravel Blade</a
+                  >
+                </li>
+                <li class="mb-4">
+                  <a href="https://fontawesome.com/" class="hover:underline"
+                    >Font Awesome</a
                   >
                 </li>
               </ul>
             </div>
             <div>
               <h2 class="mb-6 text-sm font-semibold text-dark uppercase">
-                Follow us
+                Support by
               </h2>
               <ul class="text-netral">
                 <li class="mb-4">
                   <a
-                    href="https://github.com/themesberg/flowbite"
+                    href="https://github.com/aethersMist/ArthaPlan-PemWeb"
                     class="hover:underline"
                     >Github</a
                   >
                 </li>
-                <li>
+                <li class="mb-4">
                   <a
-                    href="https://discord.gg/4eeurUVvTy"
+                    href="#"
                     class="hover:underline"
                     >Discord</a
+                  >
+                </li>
+                <li class="mb-4">
+                  <a
+                    href="https://trello.com/b/vl409pP9/aplikasi-manajemen-keuangan-pribadi"
+                    class="hover:underline"
+                    >Trello</a
                   >
                 </li>
               </ul>

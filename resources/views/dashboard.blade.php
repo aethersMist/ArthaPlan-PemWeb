@@ -69,18 +69,20 @@
         <!-- Anggaran -->
         <section class="rounded-2xl bg-light shadow-lg p-6">
           <!-- Judul -->
+            <a href="{{ route('budgets') }}">
           <div class="flex items-center mb-4 gap-2">
             <div class="flex justify-center items-center h-8 w-8 bg-primary text-light rounded-full cursor-pointer hover:bg-accent shadow-lg">
               <i class="fa-solid fa-table fa-md"></i>
             </div>
             <h2 class="text-lg font-semibold">Anggaran</h2>
           </div>
+            </a>
 
           <!-- Konten Utama -->
           <div class="flex flex-col lg:flex-row w-full gap-4 lg:gap-6 items-center lg:items-center justify-between">
             <!-- Chart -->
             <div class="w-full lg:w-2/5 flex justify-center bg-base rounded-xl py-4">
-              <div id="donutChartPersen" class="relative w-full max-w-[200px]"></div>
+              <div id="donutChartPersen" data-sisa="{{ $persenSisa }}" data-pakai="{{ $persenPakai }}"></div>
             </div>
 
             <!-- Informasi Anggaran -->
@@ -181,12 +183,15 @@
         <!-- Laporan (Pie Chart) -->
         <section class="rounded-2xl bg-light shadow-lg p-6">
           <!-- Header Laporan -->
+            <a href="{{ route('reports') }}">
+
           <div class="flex items-center mb-4 gap-2">
             <div class="flex justify-center items-center h-8 w-8 bg-primary text-light rounded-full cursor-pointer hover:bg-accent shadow-lg">
               <i class="fa fa-chart-pie fa-md"></i>
             </div>
             <h2 class="text-lg font-semibold">Laporan</h2>
           </div>
+            </a>
 
           <!-- Chart dan Legenda -->
           <div class="space-y-4 lg:space-y-0 lg:flex gap-4 items-center justify-center">
