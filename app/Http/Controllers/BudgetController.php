@@ -11,8 +11,9 @@ use Carbon\Carbon;
 class BudgetController extends Controller
 {
     // Menampilkan semua data budget
-    public function index(Request $request)
+    public function index()
     {
+        $request = request(); 
         $budgets = Budget::latest()->get();
 
 

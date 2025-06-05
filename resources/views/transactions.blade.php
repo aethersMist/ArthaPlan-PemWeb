@@ -51,7 +51,7 @@
                     <x-secondary-button data-modal-target="deleteAlertRiwayat-{{ $transaction->id }}"
                             data-modal-toggle="deleteAlertRiwayat-{{ $transaction->id }}"
                             type="button"
-                            class="flex justify-center items-center h-8 w-8 bg-primary text-light rounded-full hover:bg-accent transition duration-300 ease-in-out">
+                            class="flex justify-center items-center h-8 w-8  rounded-full ">
                       <i class="fa fa-trash"></i>
                     </x-secondary-button>
                   </td>

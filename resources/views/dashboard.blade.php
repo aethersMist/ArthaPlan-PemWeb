@@ -98,10 +98,6 @@
                   <p>220.000</p>
                 </div>
               </div>
-              <div class="flex justify-between items-center">
-                <p class="lightspace-nowrap">Rata-rata Harian</p>
-                <p class="text-right">10.000</p>
-              </div>
             </div>
           </div>
         </section>
@@ -109,7 +105,7 @@
         <!-- Riwayat Transaksi -->
         <section class="rounded-2xl bg-light shadow-lg p-4">
             <a href="{{ route('transactions') }}">
-            
+
           <div class="flex items-center mb-4 gap-2">
             <div class="flex justify-center items-center h-8 w-8 bg-primary text-light rounded-full cursor-pointer hover:bg-accent shadow-lg">
               <i class="fa fa-file-lines fa-md" aria-hidden="true"></i>
@@ -197,33 +193,16 @@
           <div class="space-y-4 lg:space-y-0 lg:flex gap-4 items-center justify-center">
             <!-- Donut Chart -->
             <div class="flex items-center justify-center w-full lg:w-1/2">
-              <div id="pie-chart"></div>
-            </div>
+                <div id="pie-chart-Income"
+                    data-categories='@json($categories)'
+                    data-values='@json($values)'>
+                </div>
+              </div>
 
             <!-- Legenda -->
             <div class="flex justify-center items-center mt-4 text-sm md:text-lg w-full bg-base rounded-xl p-4 h-full">
-              <ul class="flex flex-wrap gap-x-6 gap-y-2 space-x-4">
-                <li class="flex items-center">
-                  <span class="w-3 h-3 rounded-full bg-[#88cf0f] mr-2"></span>
-                  Makanan
-                </li>
-                <li class="flex items-center">
-                  <span class="w-3 h-3 rounded-full bg-[#A1D97E] mr-2"></span>
-                  Laundry
-                </li>
-                <li class="flex items-center">
-                  <span class="w-3 h-3 rounded-full bg-[#285539] mr-2"></span>
-                  Minuman
-                </li>
-                <li class="flex items-center">
-                  <span class="w-3 h-3 rounded-full bg-[#6C8768] mr-2"></span>
-                  Bensin
-                </li>
-                <li class="flex items-center">
-                  <span class="w-3 h-3 rounded-full bg-[#f2f2e8] border border-gray-300 mr-2"></span>
-                  Lainnya
-                </li>
-              </ul>
+              <ul id="legend-Dashboard" class="flex flex-wrap gap-x-6 gap-y-2 space-x-4">
+                </ul>
             </div>
           </div>
         </section>
@@ -244,7 +223,7 @@
             <x-dropdown align="right" width="auto">
                     <x-slot name="trigger">
                         <x-secondary-button class="text-sm rounded-lg px-1.5 py-[1px] gap-1">
-                    {{ __('Filter:  ') . ucfirst($filter ?? 'bulan') }}
+                    {{ ucfirst($filter ?? 'bulan') }}
                     <i class="fa-solid fa-chevron-down"></i>
                 </x-secondary-button>
                     </x-slot>
@@ -252,7 +231,7 @@
                     <x-slot name="content">
                       <div class="space-y-1 p-1 rounded-lg text-sm text-dark">
                           @foreach(['tahun', 'bulan', 'minggu', 'hari'] as $option)
-                            <button 
+                            <button
                                 type="button"
                                 data-filter="{{ $option }}"
                                 class="w-full text-left px-3 py-1.5 hover:bg-gray-100 {{ ($filter ?? 'bulan') === $option ? 'font-bold bg-gray-200 rounded' : '' }}">
@@ -274,7 +253,7 @@
             <div
               class="bg-gradient-to-t from-accent to-base rounded-xl h-auto flex items-center justify-center text-light p-4"
             >
-              <canvas id="barChartCanvas" 
+              <canvas id="barChartCanvas"
                     data-labels='@json($labels)'
                     data-data-out='@json($dataOut)'
                     data-data-in='@json($dataIn)'>
@@ -283,6 +262,7 @@
           </div>
         </section>
         <!-- end diagram card  -->
+
       </div>
     </div>
     <!-- Content -->
@@ -298,7 +278,7 @@
           @csrf
           @method('DELETE')
           <x-danger-button type="submit" class="rounded-lg px-4 py-2">
-                Hapus             
+                Hapus
             </x-danger-button>
         </form>
       </x-moddal>
@@ -342,7 +322,7 @@
           </div>
           <div class="flex items-center justify-end mt-6 gap-2">
             <x-primary-button type="submit" class="rounded-lg px-4 py-2">
-                Simpan             
+                Simpan
             </x-primary-button>
           </div>
         </form>

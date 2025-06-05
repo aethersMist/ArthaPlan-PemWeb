@@ -7,6 +7,7 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
+// Bar Chart - Dash
 document.addEventListener("DOMContentLoaded", function () {
     // Inisialisasi chart
     let barChart;
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     {
                         label: "Pemasukan",
                         data: dataIn,
-                        backgroundColor: "#88cf0f",
+                        backgroundColor: "#285539",
                         borderRadius: 8,
                         barThickness: 20,
                     },
@@ -166,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Anggaran
+// Donat Chart Anggaran(Dash)
 document.addEventListener("DOMContentLoaded", function () {
     const ctxContainer = document.getElementById("donutChartPersen");
 
@@ -221,3 +222,305 @@ document.addEventListener("DOMContentLoaded", function () {
 
     new Chart(ctx, config);
 });
+
+// Laporan - Dash - Income
+document.addEventListener("DOMContentLoaded", function () {
+    const pieContainer = document.getElementById("pie-chart-Income");
+    if (!pieContainer) return;
+
+    // Ambil data dari data-attributes
+    const rawCategories = pieContainer.dataset.categories;
+    const rawValues = pieContainer.dataset.values;
+
+    let categories = [];
+    let values = [];
+
+    if (!rawCategories || !rawValues) {
+        categories = ["Belum Ada Data"];
+        values = [1];
+    } else {
+        try {
+            categories = JSON.parse(rawCategories);
+            values = JSON.parse(rawValues);
+
+            // Cek apakah array kosong atau semua nilainya 0
+            if (values.length === 0 || values.every((v) => v === 0)) {
+                categories = ["Belum Ada Data"];
+                values = [1];
+            }
+        } catch (e) {
+            console.error("JSON parse error:", e);
+            categories = ["Belum Ada Data"];
+            values = [1];
+        }
+    }
+
+    // Buat canvas
+    const canvas = document.createElement("canvas");
+    canvas.width = 200;
+    canvas.height = 200;
+    pieContainer.appendChild(canvas);
+    const ctx = canvas.getContext("2d");
+
+    // Warna background
+    const colors = [
+        "#285539",
+        "#88cf0f",
+        "#00bfa6",
+        "#ff9f1c",
+        "#2979ff",
+        "#ff4081",
+    ];
+    const backgroundColors = categories.map(
+        (_, index) => colors[index % colors.length]
+    );
+
+    // Pie Chart Config
+    new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: categories,
+            datasets: [
+                {
+                    label: "Pemasukan per Kategori",
+                    data: values,
+                    backgroundColor: backgroundColors,
+                    borderColor: "#fff",
+                    borderWidth: 2,
+                },
+            ],
+        },
+        options: {
+            responsive: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            const label = context.label || "";
+                            const value = context.parsed || 0;
+                            return `${label}: Rp ${value.toLocaleString(
+                                "id-ID"
+                            )}`;
+                        },
+                    },
+                },
+            },
+        },
+    });
+
+    // LEGEND DASHBOARD
+    const legendContainer = document.getElementById("legend-Dashboard");
+    if (legendContainer) {
+        legendContainer.innerHTML = "";
+
+        categories.forEach((category, i) => {
+            const color = backgroundColors[i];
+
+            const legendItem = document.createElement("li");
+            legendItem.className =
+                "flex items-center transition hover:scale-105 mb-1";
+
+            const colorBox = document.createElement("span");
+            colorBox.className = "w-3 h-3 rounded-full mr-2";
+            colorBox.style.backgroundColor = color;
+
+            const label = document.createTextNode(category);
+
+            legendItem.appendChild(colorBox);
+            legendItem.appendChild(label);
+            legendContainer.appendChild(legendItem);
+        });
+    }
+
+    // LEGEND REPORT
+    const legendContainerReport = document.getElementById("legend-Report");
+
+    if (legendContainerReport) {
+        legendContainerReport.innerHTML = "";
+
+        const totalValue = values.reduce((a, b) => a + b, 0) || 1;
+
+        categories.forEach((category, i) => {
+            const value = values[i];
+            const percentage = ((value / totalValue) * 100).toFixed(2);
+            const color = backgroundColors[i];
+
+            const li = document.createElement("li");
+
+            const topWrapper = document.createElement("div");
+            topWrapper.className =
+                "flex justify-between items-center w-full text-sm font-semibold text-dark mb-1";
+
+            const left = document.createElement("div");
+            left.className = "flex items-center gap-2";
+
+            const label = document.createElement("span");
+            label.textContent = category;
+
+            left.appendChild(label);
+
+            const nominal = document.createElement("p");
+            nominal.textContent = "Rp " + value.toLocaleString("id-ID");
+
+            topWrapper.appendChild(left);
+            topWrapper.appendChild(nominal);
+
+            // Progress bar
+            const progressBg = document.createElement("div");
+            progressBg.className = "w-full bg-gray-300 rounded-full h-2";
+
+            const progressFill = document.createElement("div");
+            progressFill.className = "h-2 rounded-full";
+            progressFill.style.backgroundColor = color;
+            progressFill.style.width = percentage + "%";
+
+            progressBg.appendChild(progressFill);
+
+            li.appendChild(topWrapper);
+            li.appendChild(progressBg);
+
+            legendContainerReport.appendChild(li);
+        });
+    }
+});
+
+// Laporan - Outcome
+document.addEventListener("DOMContentLoaded", function () {
+    const pieContainerOut = document.getElementById("pie-chart-Outcome");
+    if (!pieContainerOut) return;
+
+    // Ambil data dari data-attributes (pastikan pakai tanda - di HTML!)
+    const rawCategories = pieContainerOut.getAttribute("data-categories-out");
+    const rawValues = pieContainerOut.getAttribute("data-values-out");
+
+    let categoriesOut = [];
+    let valuesOut = [];
+
+    if (!rawCategories || !rawValues) {
+        categoriesOut = ["Belum Ada Data"];
+        valuesOut = [1];
+    } else {
+        try {
+            categoriesOut = JSON.parse(rawCategories);
+            valuesOut = JSON.parse(rawValues);
+
+            if (valuesOut.length === 0 || valuesOut.every((v) => v === 0)) {
+                categoriesOut = ["Belum Ada Data"];
+                valuesOut = [1];
+            }
+        } catch (e) {
+            console.error("JSON parse error:", e);
+            categoriesOut = ["Belum Ada Data"];
+            valuesOut = [1];
+        }
+    }
+
+    // Buat canvas
+    const canvas = document.createElement("canvas");
+    canvas.width = 200;
+    canvas.height = 200;
+    pieContainerOut.appendChild(canvas);
+    const ctx = canvas.getContext("2d");
+
+    // Warna background
+    const colors = [
+        "#f87171",
+        "#ff9f1c",
+        "#ff4081",
+        "#2979ff",
+        "#ef4444",
+        "#991b1b",
+    ];
+    const backgroundColors = categoriesOut.map(
+        (_, index) => colors[index % colors.length]
+    );
+
+    // Pie Chart Config
+    new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: categoriesOut,
+            datasets: [
+                {
+                    label: "Pengeluaran per Kategori",
+                    data: valuesOut,
+                    backgroundColor: backgroundColors,
+                    borderColor: "#fff",
+                    borderWidth: 2,
+                },
+            ],
+        },
+        options: {
+            responsive: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            const label = context.label || "";
+                            const value = context.parsed || 0;
+                            return `${label}: Rp ${value.toLocaleString(
+                                "id-ID"
+                            )}`;
+                        },
+                    },
+                },
+            },
+        },
+    });
+
+    // LEGEND REPORT
+    const legendContainerReport = document.getElementById(
+        "legend-Report-Outcome"
+    );
+
+    if (legendContainerReport) {
+        legendContainerReport.innerHTML = "";
+
+        const totalValue = valuesOut.reduce((a, b) => a + b, 0) || 1;
+
+        categoriesOut.forEach((category, i) => {
+            const value = valuesOut[i];
+            const percentage = ((value / totalValue) * 100).toFixed(2);
+            const color = backgroundColors[i];
+
+            const li = document.createElement("li");
+
+            const topWrapper = document.createElement("div");
+            topWrapper.className =
+                "flex justify-between items-center w-full text-sm font-semibold text-dark mb-1";
+
+            const left = document.createElement("div");
+            left.className = "flex items-center gap-2";
+
+            const label = document.createElement("span");
+            label.textContent = category;
+
+            left.appendChild(label);
+
+            const nominal = document.createElement("p");
+            nominal.textContent = "Rp " + value.toLocaleString("id-ID");
+
+            topWrapper.appendChild(left);
+            topWrapper.appendChild(nominal);
+
+            const progressBg = document.createElement("div");
+            progressBg.className = "w-full bg-gray-300 rounded-full h-2";
+
+            const progressFill = document.createElement("div");
+            progressFill.className = "h-2 rounded-full";
+            progressFill.style.backgroundColor = color;
+            progressFill.style.width = percentage + "%";
+
+            progressBg.appendChild(progressFill);
+
+            li.appendChild(topWrapper);
+            li.appendChild(progressBg);
+
+            legendContainerReport.appendChild(li);
+        });
+    }
+});
+
+// Line Chart - Outcome

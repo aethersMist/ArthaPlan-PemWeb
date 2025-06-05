@@ -141,6 +141,8 @@
         class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
       >
         <!-- Anggaran -->
+        <a data-modal-target="detail"
+                data-modal-toggle="detail">
         <section class="rounded-2xl bg-light shadow-lg p-6">
           <!-- Judul -->
           <div class="flex justify-between items-center mb-4">
@@ -179,12 +181,6 @@
                   80%
                 </div>
               </div>
-              <!-- Tanggal -->
-                <div class="flex justify-between items-center bg-gray-200 font-semibold px-2 rounded">
-                    <p class="text-right">01 Juni 2025</p>
-                    <span> - </span>
-                    <p class="text-right">10 Juni 2025</p>
-                </div>
                 
               <div class="flex justify-between items-center">
                 <p class="lightspace-nowrap">Anggaran</p>
@@ -201,32 +197,16 @@
             </div>
           </div>
         </section>
+        </a>
 
       </div>
     </div>
 
-    
-    
-
-      {{-- <!-- Modal Hapus --> --}}
-      <x-moddal id="delete" title="Hapus Data" :name="'Hapus'">
-        <div class="mb-6 text-dark">
-          Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.
-        </div>
-        <form method="POST" action="#" class="flex justify-end gap-2">
-          @csrf
-          @method('DELETE')
-          <x-danger-button type="submit" class="rounded-lg px-4 py-2">
-                Hapus             
-            </x-danger-button>
-        </form>
-      </x-moddal>
-
-
+    @foreach ($budgets as $budget)
 
       {{-- Modal Budget --}}
-      <x-moddal id="budget" title="Budget" :name="'Budget'">
-        <form action="#" method="POST">
+      <x-moddal id="budget" title="Add Budget" :name="'Add Budget'">
+        <form action="{{ route('budgets.store') }}" method="POST">
           @csrf
           <div>
             <label for="amount" class="block mb-2 text-sm font-medium text-dark">Nominal</label>
@@ -317,16 +297,14 @@
               </tr>
             </tbody>
           </table>
-          <form action="" method="POST" enctype="multipart/form-data">
-        @csrf
-       
-        <div class="flex items-center justify-end mt-6 ">
-          <x-danger-button type="submit" data-modal-target="delete"
-                data-modal-toggle="delete" class="rounded-full w-8 h-8"
->            <i class="fa fa-trash" aria-hidden="true"></i>
-          </x-danger-button>
-        </div>
-      </form>
+          <form method="POST" action="{{ route('budgets.destroy', $budget->id) }}" class="flex justify-end gap-2">
+          @csrf
+          @method('DELETE')
+          <x-danger-button type="submit" class="rounded-lg px-4 py-2">
+                Hapus             
+            </x-danger-button>
+        </form>
     </x-moddal>
+    @endforeach
 
 </x-app-layout>

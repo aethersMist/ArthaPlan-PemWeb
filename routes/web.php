@@ -15,9 +15,12 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/transactions', TransactionController::class);
+    Route::resource('/reports', ReportController::class);
     Route::resource('/budgets', BudgetController::class);
 });
 
+
+    Route::resource('/reports', ReportController::class);
     Route::get('/reports', [ReportController::class, 'index'])->name('reports');
 
     Route::resource('/transactions', TransactionController::class);
