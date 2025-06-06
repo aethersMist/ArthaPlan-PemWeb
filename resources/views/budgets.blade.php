@@ -181,6 +181,12 @@
                   80%
                 </div>
               </div>
+              <!-- Tanggal -->
+                <div class="flex justify-between items-center bg-gray-200 font-semibold px-2 rounded">
+                    <p class="text-right">01 Juni 2025</p>
+                    <span> - </span>
+                    <p class="text-right">10 Juni 2025</p>
+                </div>
                 
               <div class="flex justify-between items-center">
                 <p class="lightspace-nowrap">Anggaran</p>
@@ -202,11 +208,13 @@
       </div>
     </div>
 
-    @foreach ($budgets as $budget)
+    
+    
 
+    @foreach($budgets as $butget)
       {{-- Modal Budget --}}
       <x-moddal id="budget" title="Add Budget" :name="'Add Budget'">
-        <form action="{{ route('budgets.store') }}" method="POST">
+        <form action="#" method="POST">
           @csrf
           <div>
             <label for="amount" class="block mb-2 text-sm font-medium text-dark">Nominal</label>
@@ -297,13 +305,19 @@
               </tr>
             </tbody>
           </table>
+          <form action="" method="POST" enctype="multipart/form-data">
+        @csrf
+       
+        <div class="flex items-center justify-end mt-6 ">
           <form method="POST" action="{{ route('budgets.destroy', $budget->id) }}" class="flex justify-end gap-2">
           @csrf
           @method('DELETE')
-          <x-danger-button type="submit" class="rounded-lg px-4 py-2">
+          <x-danger-button type="submit" class="rounded-full w-8 h-8">
                 Hapus             
             </x-danger-button>
         </form>
+        </div>
+      </form>
     </x-moddal>
     @endforeach
 
