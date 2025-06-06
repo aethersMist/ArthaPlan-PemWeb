@@ -7,7 +7,7 @@
 
         <title>{{ config('app.name', 'ArthaPlan') }}</title>
         <link rel="shortcut icon" href="{{ asset('favicon.svg') }}" type="image/x-icon">
-        
+
         <!-- Font Awesome -->
         <link
         rel="stylesheet"
@@ -160,18 +160,22 @@
         <div
           class="flex flex-col mb-8 space-y-4 lg:mb-16 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4"
         >
-          <a
-            href="{{ route('login') }}"
-          >
-
-          <x-primary-button class="rounded-lg px-8 py-4" >Login</x-primary-button>
-
-          </a>
-          <a
-            href="{{ route('register') }}"
-          >
-                                    <x-secondary-button class="rounded-lg px-8 py-4" >Sign Up</x-secondary-button>
-          </a>
+          @if (Route::has('login'))
+                          @auth
+                              <a href="{{ route('dashboard') }}">
+                                  <x-primary-button class="rounded-lg px-8 py-4">Dashboard</x-primary-button>
+                              </a>
+                          @else
+                              <a href="{{ route('login') }}">
+                                  <x-primary-button class="rounded-lg px-8 py-4">Login</x-primary-button>
+                              </a>
+                              @if (Route::has('register'))
+                                  <a href="{{ route('register') }}">
+                                      <x-secondary-button class="rounded-lg px-8 py-4">Sign Up</x-secondary-button>
+                                  </a>
+                              @endif
+                          @endauth
+                      @endif
         </div>
       </div>
     </section>
@@ -205,10 +209,10 @@
           </p>
         </div>
         <div class="grid grid-cols-2 gap-4 mt-8">
-          
-          <img src="{{ asset('assets/images/laporan1.png') }}" 
+
+          <img src="{{ asset('assets/images/laporan1.png') }}"
          alt="Foto Profil" class="w-full mt-4 rounded-lg lg:mt-10">
-<img src="{{ asset('assets/images/image.png') }}" 
+<img src="{{ asset('assets/images/image.png') }}"
          alt="Foto Profil" class="w-full mt-4 rounded-lg lg:mt-10">
         </div>
       </div>

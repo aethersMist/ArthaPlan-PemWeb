@@ -48,7 +48,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         beginAtZero: true,
                         ticks: {
                             callback: function (value) {
-                                return "Rp" + value.toLocaleString("id-ID");
+                                return `${label}: Rp ${value.toLocaleString(
+                                    "id-ID",
+                                    {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2,
+                                    }
+                                )}`;
                             },
                         },
                     },
@@ -237,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!rawCategories || !rawValues) {
         categories = ["Belum Ada Data"];
-        values = [1];
+        values = [100];
     } else {
         try {
             categories = JSON.parse(rawCategories);
@@ -246,12 +252,12 @@ document.addEventListener("DOMContentLoaded", function () {
             // Cek apakah array kosong atau semua nilainya 0
             if (values.length === 0 || values.every((v) => v === 0)) {
                 categories = ["Belum Ada Data"];
-                values = [1];
+                values = [100];
             }
         } catch (e) {
             console.error("JSON parse error:", e);
             categories = ["Belum Ada Data"];
-            values = [1];
+            values = [100];
         }
     }
 
@@ -300,7 +306,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             const label = context.label || "";
                             const value = context.parsed || 0;
                             return `${label}: Rp ${value.toLocaleString(
-                                "id-ID"
+                                "id-ID",
+                                {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                }
                             )}`;
                         },
                     },
@@ -361,7 +371,12 @@ document.addEventListener("DOMContentLoaded", function () {
             left.appendChild(label);
 
             const nominal = document.createElement("p");
-            nominal.textContent = "Rp " + value.toLocaleString("id-ID");
+            nominal.textContent =
+                "Rp " +
+                value.toLocaleString("id-ID", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                });
 
             topWrapper.appendChild(left);
             topWrapper.appendChild(nominal);
@@ -399,7 +414,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!rawCategories || !rawValues) {
         categoriesOut = ["Belum Ada Data"];
-        valuesOut = [1];
+        valuesOut = [100];
     } else {
         try {
             categoriesOut = JSON.parse(rawCategories);
@@ -407,12 +422,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (valuesOut.length === 0 || valuesOut.every((v) => v === 0)) {
                 categoriesOut = ["Belum Ada Data"];
-                valuesOut = [1];
+                valuesOut = [100];
             }
         } catch (e) {
             console.error("JSON parse error:", e);
             categoriesOut = ["Belum Ada Data"];
-            valuesOut = [1];
+            valuesOut = [100];
         }
     }
 
@@ -461,7 +476,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             const label = context.label || "";
                             const value = context.parsed || 0;
                             return `${label}: Rp ${value.toLocaleString(
-                                "id-ID"
+                                "id-ID",
+                                {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                }
                             )}`;
                         },
                     },
@@ -500,7 +519,12 @@ document.addEventListener("DOMContentLoaded", function () {
             left.appendChild(label);
 
             const nominal = document.createElement("p");
-            nominal.textContent = "Rp " + value.toLocaleString("id-ID");
+            nominal.textContent =
+                "Rp " +
+                value.toLocaleString("id-ID", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                });
 
             topWrapper.appendChild(left);
             topWrapper.appendChild(nominal);

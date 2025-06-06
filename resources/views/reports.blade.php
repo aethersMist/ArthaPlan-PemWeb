@@ -25,14 +25,14 @@
               >
                 <p>total pemasukkan</p>
 
-                <x-secondary-button 
+                <x-primary-button
                             class="flex justify-center items-center h-8 w-8  rounded-full ">
                       <i class="fa fa-download"></i>
-                    </x-secondary-button>
+                    </x-primary-button>
 
               </div>
               <div
-                id="lineChartIncome" 
+                id="lineChartIncome"
                 class="bg-base p-4 rounded-lg"
               ></div>
             </div>
@@ -63,7 +63,7 @@
               <div
                 class="flex justify-between items-center mt-4 text-sm md:text-lg w-full bg-base rounded-xl p-4 h-full">
                 <ul id="legend-Report" class="flex flex-col gap-y-4 w-full">
-                  
+
                 </ul>
               </div>
             </div>
@@ -91,15 +91,15 @@
               >
                 <p>total pengeluaran</p>
 
-                <x-secondary-button 
+                <x-danger-button
                             class="flex justify-center items-center h-8 w-8  rounded-full ">
                       <i class="fa fa-download"></i>
-                    </x-secondary-button>
+                    </x-danger-button>
 
               </div>
 
               <div
-                id="lineChartOutcome" 
+                id="lineChartOutcome"
                 class="bg-base p-4 rounded-lg"
               ></div>
             </div>
@@ -128,7 +128,7 @@
               <div
                 class="flex justify-between items-center mt-4 text-sm md:text-lg w-full bg-base rounded-xl p-4 h-full">
                 <ul id="legend-Report-Outcome" class="flex flex-col gap-y-4 w-full">
-                  
+
                 </ul>
               </div>
             </div>
