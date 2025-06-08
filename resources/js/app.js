@@ -9,7 +9,6 @@ Alpine.start();
 
 // Bar Chart - Dash
 document.addEventListener("DOMContentLoaded", function () {
-    // Inisialisasi chart
     let barChart;
 
     function initChart(labels, dataOut, dataIn) {
@@ -48,13 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         beginAtZero: true,
                         ticks: {
                             callback: function (value) {
-                                return `${label}: Rp ${value.toLocaleString(
-                                    "id-ID",
-                                    {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                    }
-                                )}`;
+                                return "Rp" + value.toLocaleString("id-ID");
                             },
                         },
                     },
@@ -243,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!rawCategories || !rawValues) {
         categories = ["Belum Ada Data"];
-        values = [100];
+        values = [1];
     } else {
         try {
             categories = JSON.parse(rawCategories);
@@ -252,12 +245,12 @@ document.addEventListener("DOMContentLoaded", function () {
             // Cek apakah array kosong atau semua nilainya 0
             if (values.length === 0 || values.every((v) => v === 0)) {
                 categories = ["Belum Ada Data"];
-                values = [100];
+                values = [1];
             }
         } catch (e) {
             console.error("JSON parse error:", e);
             categories = ["Belum Ada Data"];
-            values = [100];
+            values = [1];
         }
     }
 
@@ -306,11 +299,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             const label = context.label || "";
                             const value = context.parsed || 0;
                             return `${label}: Rp ${value.toLocaleString(
-                                "id-ID",
-                                {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2,
-                                }
+                                "id-ID"
                             )}`;
                         },
                     },
@@ -371,12 +360,7 @@ document.addEventListener("DOMContentLoaded", function () {
             left.appendChild(label);
 
             const nominal = document.createElement("p");
-            nominal.textContent =
-                "Rp " +
-                value.toLocaleString("id-ID", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                });
+            nominal.textContent = "Rp " + value.toLocaleString("id-ID");
 
             topWrapper.appendChild(left);
             topWrapper.appendChild(nominal);
@@ -414,7 +398,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!rawCategories || !rawValues) {
         categoriesOut = ["Belum Ada Data"];
-        valuesOut = [100];
+        valuesOut = [1];
     } else {
         try {
             categoriesOut = JSON.parse(rawCategories);
@@ -422,12 +406,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (valuesOut.length === 0 || valuesOut.every((v) => v === 0)) {
                 categoriesOut = ["Belum Ada Data"];
-                valuesOut = [100];
+                valuesOut = [1];
             }
         } catch (e) {
             console.error("JSON parse error:", e);
             categoriesOut = ["Belum Ada Data"];
-            valuesOut = [100];
+            valuesOut = [1];
         }
     }
 
@@ -476,11 +460,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             const label = context.label || "";
                             const value = context.parsed || 0;
                             return `${label}: Rp ${value.toLocaleString(
-                                "id-ID",
-                                {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2,
-                                }
+                                "id-ID"
                             )}`;
                         },
                     },
@@ -519,12 +499,7 @@ document.addEventListener("DOMContentLoaded", function () {
             left.appendChild(label);
 
             const nominal = document.createElement("p");
-            nominal.textContent =
-                "Rp " +
-                value.toLocaleString("id-ID", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                });
+            nominal.textContent = "Rp " + value.toLocaleString("id-ID");
 
             topWrapper.appendChild(left);
             topWrapper.appendChild(nominal);

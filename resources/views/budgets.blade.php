@@ -65,7 +65,7 @@
       </section>
 
       <section class="flex flex-col md:flex-row justify-between items-center w-full bg-light shadow-lg rounded-2xl p-6 mb-6 gap-6">
-   
+
         <!-- Chart - Sebelah Kiri -->
     <div class="flex flex-col w-full md:w-1/3 items-center bg-base rounded-xl p-4 gap-4">
       <div id="donutChartPersen" data-sisa="{{ $persenSisa }}" data-pakai="{{ $persenPakai }}"></div>
@@ -170,8 +170,8 @@
             <!-- Informasi Anggaran -->
             <div class="w-full space-y-2 text-md sm:text-sm lg:text-lg">
                 <div class="w-full space-y-2 text-md sm:text-sm lg:text-lg">
-      
-                
+
+
               <!-- Line -->
               <div class="w-full bg-gray-200 rounded-xl p-1">
                 <div
@@ -187,7 +187,7 @@
                     <span> - </span>
                     <p class="text-right">10 Juni 2025</p>
                 </div>
-                
+
               <div class="flex justify-between items-center">
                 <p class="lightspace-nowrap">Anggaran</p>
                 <p class="text-right">60.000</p>
@@ -208,10 +208,10 @@
       </div>
     </div>
 
-    
-    
 
-    @foreach($budgets as $butget)
+
+
+    {{-- @foreach($budgets as $butget) --}}
       {{-- Modal Budget --}}
       <x-moddal id="budget" title="Add Budget" :name="'Add Budget'">
         <form action="#" method="POST">
@@ -223,7 +223,7 @@
           </div>
           <div class="flex items-center justify-end mt-6 gap-2">
             <x-primary-button type="submit" class="rounded-lg px-4 py-2">
-                Simpan             
+                Simpan
             </x-primary-button>
           </div>
         </form>
@@ -307,18 +307,18 @@
           </table>
           <form action="" method="POST" enctype="multipart/form-data">
         @csrf
-       
+
         <div class="flex items-center justify-end mt-6 ">
-          <form method="POST" action="{{ route('budgets.destroy', $budget->id) }}" class="flex justify-end gap-2">
+          <form method="POST" action="" class="flex justify-end gap-2">
           @csrf
           @method('DELETE')
           <x-danger-button type="submit" class="rounded-full w-8 h-8">
-                Hapus             
+                Hapus
             </x-danger-button>
         </form>
         </div>
       </form>
     </x-moddal>
-    @endforeach
+    {{-- @endforeach --}}
 
 </x-app-layout>
