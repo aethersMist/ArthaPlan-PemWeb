@@ -84,6 +84,13 @@
 
     <!-- Ringkasan - Sebelah Kanan -->
     <div class="w-full md:w-2/3 grid grid-row-1 md:grid-row-3 gap-4">
+        <!-- Tanggal -->
+                <div class="flex justify-between items-center bg-gray-200 font-semibold px-2 rounded">
+                    <p class="text-right">01 Juni 2025</p>
+                    <span> - </span>
+                    <p class="text-right">10 Juni 2025</p>
+                </div>
+
         <!-- Anggaran -->
         <div class="flex items-center justify-between px-4 py-2 rounded-xl shadow-lg bg-primary text-light">
             <div>
@@ -141,8 +148,6 @@
         class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
       >
         <!-- Anggaran -->
-        <a data-modal-target="detail"
-                data-modal-toggle="detail">
         <section class="rounded-2xl bg-light shadow-lg p-6">
           <!-- Judul -->
           <div class="flex justify-between items-center mb-4">
@@ -181,16 +186,20 @@
                   80%
                 </div>
               </div>
-              <!-- Tanggal -->
-                <div class="flex justify-between items-center bg-gray-200 font-semibold px-2 rounded">
-                    <p class="text-right">01 Juni 2025</p>
-                    <span> - </span>
-                    <p class="text-right">10 Juni 2025</p>
-                </div>
+              
 
               <div class="flex justify-between items-center">
                 <p class="lightspace-nowrap">Anggaran</p>
-                <p class="text-right">60.000</p>
+                <div class="inline-flex justify-center items-center space-x-1">
+                    <p class="text-right">60.000</p>
+                    <button type="button" data-modal-target="budgetTrans"
+                        data-modal-toggle="budgetTrans" class="text-sm text-netral-light hover:text-netral cursor-pointer transition duration-300 ease-in-out">
+                        <i
+                        class="fa fa-edit fa-lg"
+                        aria-hidden="true"
+                        ></i>
+                    </button>
+                </div>
               </div>
               <div class="flex justify-between items-center">
                 <p class="lightspace-nowrap">Pengeluaran</p>
@@ -203,8 +212,6 @@
             </div>
           </div>
         </section>
-        </a>
-
       </div>
     </div>
 
@@ -214,6 +221,23 @@
     {{-- @foreach($budgets as $butget) --}}
       {{-- Modal Budget --}}
       <x-moddal id="budget" title="Add Budget" :name="'Add Budget'">
+        <form action="#" method="POST">
+          @csrf
+          <div>
+            <label for="amount" class="block mb-2 text-sm font-medium text-dark">Nominal</label>
+            <input type="number" id="amount" name="amount" placeholder="100000" required
+                   class="block w-full p-2.5 text-sm text-dark bg-gray-50 border border-gray-300 rounded-lg" />
+          </div>
+          <div class="flex items-center justify-end mt-6 gap-2">
+            <x-primary-button type="submit" class="rounded-lg px-4 py-2">
+                Simpan
+            </x-primary-button>
+          </div>
+        </form>
+      </x-moddal>
+
+      {{-- Modal BudgetTrans --}}
+      <x-moddal id="budgetTrans" title="Add Budget Transaction" :name="'Add Budget Transaction'">
         <form action="#" method="POST">
           @csrf
           <div>
